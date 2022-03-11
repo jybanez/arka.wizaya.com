@@ -1,0 +1,22 @@
+{
+  "name": "arka.wizaya.com",
+  "version": "1.0.4",
+  "description": "ARKA",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jybanez/arka.wizaya.com.git"
+  },
+  "keywords": [
+    "ARKA"
+  ],
+  "author": "Wizaya Business Technologies",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jybanez/arka.wizaya.com/issues"
+  },
+  "homepage": "https://github.com/jybanez/arka.wizaya.com#readme"
+}

@@ -1,0 +1,176 @@
+html, body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:12px;
+	line-height:1.5em;
+	padding:0;
+	margin:0;
+	height:100vh;
+	width:100vw;
+}
+
+body.empty {
+	overflow:hidden;
+	position:fixed;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	height:100vh;
+	width:100vw;
+}
+body.empty .poster {
+	display:none;
+}
+
+.poster {
+	display:block;
+	position:fixed;
+	top:0;
+	right:0;
+	left:0;
+	bottom:0;
+	background-color:#fff;
+	z-index:3;
+}
+
+.poster .header,
+.poster .footer {
+	position:absolute;
+	left:0;
+	right:0;
+	font-size:10px;
+	text-align:center;
+	padding:5px;
+	color: #333;
+}
+.poster .header {
+	top:0;
+}
+.poster .footer {
+	bottom:0;
+	text-align:right;
+}
+.poster .footer>.content {
+	display:table;
+	border-collapse: collapse;
+	width:100%;
+}
+.poster .footer>.content>* {
+	display:table-cell;
+}
+.poster .footer>.content .connection {
+	text-align:left;	
+}
+
+.poster .footer>.content .version {
+	text-align:right;
+}
+.poster .container {
+	display:table;
+	width:100%;
+	height:100%;
+}
+.poster .content {
+	display:table-cell;
+	vertical-align:middle;
+	text-align:center;
+	margin:0 auto;
+	height:100%;
+}
+
+.poster .logo {
+	display:inline-block;
+	width:192px;
+	height:192px;
+	margin:0 auto;
+	background-position:center center;
+	background-repeat:no-repeat;
+	position:relative;
+}
+
+.poster.splash .logo {
+	width:320px;
+	height:320px;
+	background-image:url(../images/splash.png);
+}
+
+.poster.offline .logo {
+	background-image:url(../images/icon.png);
+}
+
+.poster.offline {
+	z-index:4;
+}
+.poster.offline .icon {
+	width:50px;
+	height:50px;
+	position:absolute;
+	top:0;
+	right:0;
+	background:url(../images/offline.png) no-repeat center center;
+}
+
+.poster .message,
+.poster.offline .controls {
+	padding:5px;
+}
+
+.poster .spinner {
+	display: inline-block;
+  	width: 28px;
+  	height: 28px;
+}
+
+.poster .spinner:after {
+  content: " ";
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin: 2px;
+  border-radius: 50%;
+  border: 3px solid #3085d6;
+  border-color: #3085d6 transparent #3085d6 transparent;
+  animation: lds-dual-ring 1s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.assetsLoader {
+	position: fixed;
+    display: inline-block;
+    border: #ccc 1px solid;
+    border-radius: 4px;
+    padding: 4px 4px 4px 20px;
+    bottom: 10px;
+    right: 10px;
+    width: auto;
+    line-height: 14px;
+    z-index: 10;
+    background-position:2px center;
+    background-color:rgba(255,255,255,0.85);
+    background-repeat:no-repeat;
+    font-size: 11px;
+    color: #666;
+    transform:translateX(150%);
+    transition:transform 0.2s ease-in-out;
+    box-shadow:0px 0px 4px #ccc;
+}
+
+.assetsLoader.visible {
+	transform:translateX(0);
+}
+
+.assetsLoader.loading {
+	background-image:url(../images/assetsloader.gif);
+}
+
+.assetsLoader.check {
+	background-image:url(../images/check.png);
+}

@@ -1,0 +1,7 @@
+{
+  "name": "ARKA",
+  "type": "custom",
+  "integrations": {
+    "cordova": {}
+  }
+}
