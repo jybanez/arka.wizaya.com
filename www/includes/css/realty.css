@@ -1,0 +1,28 @@
+/*
+ * Realty
+ */
+@font-face {
+    font-family: "realty";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/realty.eot?a4pc5e#iefix") format("embedded-opentype"), url("../fonts/realty.ttf?a4pc5e") format("truetype"), url("../fonts/realty.woff?a4pc5e") format("woff"), url("../fonts/realty.svg?a4pc5e#realty") format("svg");
+}
+.fa.fa-tub, .fa.fa-floorplan, .fa.fa-stairs, .fa.fa-landmark {
+    font-family: "realty" !important;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    text-transform: none;
+}
+.fa-tub::before {
+    content: "";
+}
+.fa-floorplan::before {
+    content: "";
+}
+.fa-landmark::before {
+    content: "";
+}
+.fa-stairs::before {
+    content: "";
+}

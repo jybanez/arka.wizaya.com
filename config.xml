@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.wizaya.arka" 
-	version="1.0.0" 
+	version="1.0.2" 
 	versionCode="" 
 	xmlns="http://www.w3.org/ns/widgets" 
 	xmlns:android="http://schemas.android.com/apk/res/android" 
@@ -77,7 +77,6 @@
     <platform name="android">
         <allow-intent href="market:*" />
         <config-file parent="/*" target="AndroidManifest.xml">
-            <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
             <uses-permission android:name="android.permission.MICROPHONE" />
             <uses-permission android:name="android.permission.RECORD_AUDIO" />
             <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
@@ -131,7 +130,7 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-	<preference name="android-targetSdkVersion" value="30" />
+    <preference name="android-targetSdkVersion" value="30" />
     <preference name="windows-target-version" value="10.0" />
     <preference name="phonegap-version" value="cli-9.0.0" />
     <preference name="StatusBarOverlaysWebView" value="false" />
@@ -165,6 +164,4 @@
     <plugin name="cordova-plugin-iosrtc" />
     <plugin name="cordova-plugin-ios-xhr" spec="https://github.com/globules-io/cordova-plugin-ios-xhr" />
     <content src="index.html" />
-	
-	
 </widget>

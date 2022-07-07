@@ -40,10 +40,10 @@ var App = {
 			this.$assets = new Array();
 			this.$isLoaded = new Array();
 			
-			//console.log('Welcome!',this.$id,device);
-			if (['android'].contains(device.platform.toLowerCase())) {
-				new App.Interface.Log();	
-			}
+			console.log('Welcome!',this.$id,device);
+			//if (['android'].contains(device.platform.toLowerCase())) {
+			//	new App.Interface.Log();	
+			//}
 			
 			
 			this.intro(function(){
@@ -97,7 +97,7 @@ var App = {
 			});
 		},
 		intro:function(onComplete){
-			if (false){ //device.platform!='browser') {
+			if (['android'].contains(device.platform.toLowerCase())) {
 				this.$intro = new Element('video',{
 					controls:false,
 					autoplay:true,
@@ -350,28 +350,33 @@ var App = {
 			}.bind(this),onError);
 		},
 		loadAsset:function(source,onLoad){
-			var url = source.toURI();
-			var target = url.get('directory')+url.get('file');
-			console.log('App Load Asset',target);
-			this.$fileSystem.getEntry(target,function(fileEntry){
-				console.log('Asset Local Cache',fileEntry);
-				onLoad(fileEntry.toURL());
-			}.bind(this),function(){
-				onLoad(source);
-				this.startSpin('Downloading Updates. Please wait...');
-				new App.Localizer(this.$fileSystem,{
-					onSave:function(item,fileEntry){
-						console.log('Generated Local Cache',target,fileEntry);
-						//onLoad(fileEntry.toURL());
-					}.bind(this),
-					onDownloadComplete:function(){
-						this.stopSpin('Updates Complete!');
-					}.bind(this)
-				}).setItems([{
-					source:source,
-					target:target
-				}]).download();	
-			}.bind(this));				
+			if ($defined(source)) {
+				var url = source.toURI();
+				var target = url.get('directory')+url.get('file');
+				console.log('App Load Asset',target);
+				this.$fileSystem.getEntry(target,function(fileEntry){
+					console.log('Asset Local Cache',fileEntry);
+					onLoad(fileEntry.toURL());
+				}.bind(this),function(){
+					onLoad(source);
+					this.startSpin('Downloading Updates. Please wait...');
+					new App.Localizer(this.$fileSystem,{
+						onSave:function(item,fileEntry){
+							console.log('Generated Local Cache',target,fileEntry);
+							//onLoad(fileEntry.toURL());
+						}.bind(this),
+						onDownloadComplete:function(){
+							this.stopSpin('Updates Complete!');
+						}.bind(this)
+					}).setItems([{
+						source:source,
+						target:target
+					}]).download();	
+				}.bind(this));	
+			} else {
+				$pick(onLoad,$empty)();
+			}
+							
 		},
 		run:function(onRun){
 			this.showSplash({
@@ -385,43 +390,76 @@ var App = {
 					this.run(onRun);
 				}.bind(this));
 			} else {
+				window.addEvents({
+					onPlatformReady:function(instance){
+						console.log('Platform Ready!');
+						$pick(onRun,$empty)();
+					},
+					sessionReady:function(){
+						console.log('Initializing Client');
+						new Shop.Client();
+					}	
+				});
 				this.getData(function(data){
 					console.log('App Data',data);
 					var body = this.$body.appendHTML(data.body,'top');
 					var head = this.$head;
 					//this.startSpin('Updating. Please wait...');
+					console.log('Load Stylesheet '+data.stylesheet);
 					this.loadAsset(data.stylesheet,function(styleUrl){
-						console.log(data.stylesheet,styleUrl);
-						new Asset.css(styleUrl,{
-							onload:function(){
-								new Element('style',{
-									type:'text/css'
-								}).inject(head).set('text',data.inlineStyles);		
-							}.bind(this)
-						});					
-						this.loadAsset(data.script,function(scriptUrl){ 
-							console.log(data.script,scriptUrl);
-							new Asset.javascript(scriptUrl,{
+						if ($defined(styleUrl)) {
+							console.log(data.stylesheet,styleUrl);
+							new Asset.css(styleUrl,{
 								onload:function(){
-									$extend(TPH,{
-										$remote:this.app,
-										$session:data.session
-									});
-									
-									Function(data.inlineScripts)();
-									window.fireEvent('domready');
-									/*
-									new Element('script',{
-										type:'text/javascript'
-									}).inject(head).set('text',data.inlineScripts);
-									*/	
+									new Element('style',{
+										type:'text/css'
+									}).inject(head).set('text',data.inlineStyles);		
 								}.bind(this)
-							});
-							window.addEvent('onPlatformReady',function(instance){
-								if ($type(onRun)=='function') {
-									onRun();
+							});	
+						}
+						console.log('Load Script '+data.script);					
+						this.loadAsset(data.script,function(scriptUrl){ 
+							if ($defined(scriptUrl)) {
+								console.log(data.script,scriptUrl);
+								new Asset.javascript(scriptUrl,{
+									onload:function(){
+										console.log('Script loaded.');
+										$extend(TPH,{
+											$remote:this.app,
+											$session:data.session
+										});
+										if ($defined(data.inlineScripts)) {
+											console.log('Running inline scripts...');
+											new Function(data.inlineScripts)();	
+										}
+										
+										console.log('Firing domready event');
+										window.fireEvent.delay(500,window,'domready');
+									}.bind(this)
+								});	
+							} else {
+								console.log('No script loaded.');
+								$extend(TPH,{
+									$remote:this.app,
+									$session:data.session,
+									$servers:{
+										download:"https://download.wizaya.com",
+										cdn:"https://cdn.wizaya.com"
+									}
+								});
+								console.log('Firing ENGINE.');
+								new ENGINE();
+								/*
+								if ($defined(data.inlineScripts)) {
+									console.log('Running inline scripts...');
+									console.log(data.inlineScripts);
+									new Function(data.inlineScripts)();	
 								}
-							}.bind(this));
+								console.log(TPH);
+								console.log('Firing domready event');
+								window.fireEvent.delay(500,window,'domready');
+								*/
+							}
 						}.bind(this));	
 					}.bind(this));				
 				}.bind(this),function(e){

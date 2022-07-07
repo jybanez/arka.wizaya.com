@@ -1,0 +1,119 @@
+.grid.wall {
+	height:100%;
+}
+.grid.wall .grid-cell-content{
+	/*
+	border:none;
+	*/
+}
+
+.wall-item,
+.wall-item-content {
+	box-sizing: border-box;
+	overflow:hidden;
+}
+
+.wall-item {
+	position:absolute;
+	padding:5px;
+}
+
+.wall-item.dragging iframe {
+	pointer-events:none;
+}
+
+.wall-item-content {
+	width:100%;
+	height:100%;
+	border:none;
+	border-radius:2px;
+	padding:5px;
+	word-break:break-all;
+	border:transparent 1px solid;
+	/*
+	background-color:rgba(255,255,255,0.7);
+	*/
+}
+
+.wall-item:hover .wall-item-content,
+.wall-item.active .wall-item-content {
+	border-color:#ccc;
+}
+
+.wall-item-resize {
+	position:absolute;
+	display:block;
+	background:transparent;
+}
+
+.wall-item-resize.vertical {
+	left:0;
+	right:0;
+	height:5px;
+	cursor:n-resize;
+}
+.wall-item-resize.vertical.top{
+	top:0;
+}
+.wall-item-resize.vertical.bottom{
+	bottom:0;
+}
+
+.wall-item-resize.horizontal {
+	top:0;
+	bottom:0;
+	width:5px;
+	cursor:e-resize;
+}
+.wall-item-resize.horizontal.left {
+	left:0;
+}
+.wall-item-resize.horizontal.right {
+	right:0;
+}
+
+.wall-item-resize.diagonal.br {
+	right:0;
+	bottom:0;
+	width:5px;
+	height:5px;
+	cursor:nw-resize;
+}
+
+.wall-item-resize.diagonal.bl {
+	left:0;
+	bottom:0;
+	width:5px;
+	height:5px;
+	cursor:ne-resize;
+}
+.wall-item-resize.diagonal.tr {
+	right:0;
+	top:0;
+	width:5px;
+	height:5px;
+	cursor:ne-resize;
+}
+
+.wall-item-resize.diagonal.tl {
+	left:0;
+	top:0;
+	width:5px;
+	height:5px;
+	cursor:nw-resize;
+}
+
+.wall-item.maximize {
+	left:0 !important;
+	right:0 !important;
+	top:0 !important;
+	bottom:0 !important;
+	padding:0 !important;
+	width:100% !important;
+	height:100% !important;
+	position:sticky !important;
+}
+
+.wall-item.maximize .wall-item-resize {
+	display:none;
+}

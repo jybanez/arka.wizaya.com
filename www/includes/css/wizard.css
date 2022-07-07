@@ -1,0 +1,205 @@
+.wizardContainer,
+.wizardContainer * {
+	box-sizing: border-box;
+	position:relative;
+}
+
+.wizardContainer .wizard,
+.wizardContainer .controls {
+	padding:0;
+	margin:0;
+}
+.wizardContainer .wizard>li {
+	overflow:hidden;
+	background-color:#fff;
+	background-size:cover;
+	background-position:center center;
+}
+.wizardContainer .wizard>li.linked {
+	cursor:pointer;
+}
+.wizardContainer .controls .prevControl {
+	float:left;
+}
+
+.wizardContainer .controls .nextControl {
+	float:right;
+}
+
+.wizardContainer .controls .prevControl,
+.wizardContainer .controls .nextControl {
+	width:28px;
+}
+
+.wizardContainer .controls .pageContainer {
+	text-align:center;
+	background-position:top left;
+	background-repeat:repeat-x;
+	overflow: hidden;
+}
+
+.wizardContainer .control {
+	background-repeat:no-repeat;
+	cursor:pointer;
+	display:inline-block;
+	*display:inline;
+	zoom:1;
+}
+.wizardContainer .pageContainer .control {
+	width:24px;
+	height:24px;
+}
+/*
+ * Minimal
+ */
+.minimal .prevControl,
+.minimal .nextControl {
+	display:block;
+	background:rgba(255,255,255,0.3);
+	position:absolute;
+	top:0;
+	bottom:0;
+	width:1.5em;
+	text-align:center;
+	
+	-webkit-transition: width 0.5s ease;
+	-moz-transition: width 0.5s ease;
+	-ms-transition: width 0.5s ease;
+	-o-transition: width 0.5s ease;
+	transition: width 0.5s ease;
+}
+.minimal .prevControl:hover,
+.minimal .nextControl:hover {
+	width:50px;
+}
+.minimal .prevControl>span,
+.minimal .nextControl>span {
+	display:table;
+	position:absolute;
+	top:50%;
+	width:100%;
+	transform: translate(0,-50%);
+}
+
+.minimal .prevControl>span>span,
+.minimal .nextControl>span>span {
+	display:table-cell;
+	text-align: center;
+}
+
+.minimal .prevControl>span>span:before,
+.minimal .nextControl>span>span:before {
+	display: inline-block;
+    font-family: FontAwesome;
+    font-size: 72px;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color:#fff;
+    vertical-align: middle;
+}
+.minimal .prevControl:hover>span>span:before,
+.minimal .nextControl:hover>span>span:before {
+	color:#333;
+}
+.minimal .prevControl:active>span>span:before,
+.minimal .nextControl:active>span>span:before {
+	color:#fff;
+}
+.minimal .prevControl {
+	left:0;
+}
+.minimal .prevControl>span>span:before {
+	content:"\f104";
+}
+
+.minimal .nextControl {
+	right:0;
+}
+.minimal .nextControl>span>span:before {
+	content:"\f105";
+}
+
+
+
+.minimal .controls {
+	margin-top:0;
+	position:absolute;
+	left:0;
+	bottom:0;
+	right:0;
+}
+.wizardContainer.minimal .pageContainer .control {
+	width:8px;
+	height:8px;
+	border:#666 1px solid;
+	background-color:#666;
+	margin:0 5px;
+
+	-webkit-border-radius: 8px; 
+	-moz-border-radius: 8px;
+	border-radius: 8px; 
+}
+.wizardContainer.minimal .pageContainer .control.active {
+	background-color:#ccc;
+	border-color:#ccc;
+}
+/*
+ * Moonify
+ */
+
+.moonify .pageContainer {
+	background-image:url(../images/moonify/controls_bg.png);
+}
+
+.moonify .pageContainer .control {
+	background-image:url(../images/moonify/radio.png);
+	background-position:top center;
+}
+.moonify .pageContainer .control.active {
+	background-position:bottom center;
+}
+
+.moonify .prevControl,
+.moonify .nextControl {
+	background-image:url(../images/moonify/left-right_default.png);
+}
+.moonify .prevControl.active,
+.moonify .nextControl.active {
+	background-image:url(../images/moonify/left-right.png);
+}
+.moonify .prevControl {
+	background-position:left top;
+}
+
+.moonify .nextControl {
+	background-position:right bottom;
+}
+
+
+/*
+ * Steps
+ */
+
+.wizardSteps.basic {
+	display:block;
+	margin:0;
+	padding:0;
+	list-style: none;
+	position: relative;
+	overflow:hidden;
+}
+
+.wizardSteps.basic li {
+	margin:0;
+	padding:0;
+	display:inline-block;
+	*display:inline;
+	zoom:1;
+	overflow:hidden;
+}
+
+.wizardSteps.basic li.active {
+	background-color:#CCCCCC;
+}
+

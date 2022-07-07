@@ -4,60 +4,53 @@
     	<meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, height=device-height, viewport-fit=cover">
         <meta http-equiv="Content-Security-Policy" content="
-        	default-src * file: filesystem: cdvfile: https: http: gap: data: blob:; 
-        	media-src  * file: filesystem: cdvfile: https: http: gap: 'unsafe-inline' data: blob: ;  
-        	script-src  * file: filesystem: cdvfile: https: http: gap: 'unsafe-inline' 'unsafe-eval' ; 
-        	style-src  * file: filesystem: cdvfile: https: http: gap: 'unsafe-inline' 'unsafe-eval' 
+        	default-src * 'self' file: filesystem: cdvfile: https: http: gap: 'unsafe-inline' data: blob:; 
+        	media-src  * 'self' file: filesystem: cdvfile: https: http: gap: 'unsafe-inline' data: blob: android-webview-video-poster:;
+        	img-src  * 'self' file: filesystem: cdvfile: https: http: gap: 'unsafe-inline' data: blob: android-webview-video-poster:;  
+        	script-src  * 'self' file: filesystem: cdvfile: https: http: gap: 'unsafe-inline' 'unsafe-eval' ; 
+        	style-src  * 'self' file: filesystem: cdvfile: https: http: gap: 'unsafe-inline' 'unsafe-eval' 
         " /> 
         <title>ARKA</title>
-		<!--
-        <script type="text/javascript" src="js/mootools.js"></script>
-        <script type="text/javascript" src="js/mootools.helper.js"></script>
+		
+        
+        <!--
         <script type="text/javascript" src="js/app.js"></script>
         <script type="text/javascript" src="js/app.interface.js"></script>
         <script type="text/javascript" src="js/app.filesystem.js"></script>
         <script type="text/javascript" src="js/app.localizer.js"></script>
         -->
-        <link rel="stylesheet" href="css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="css/realty.css"/>
-        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="css/styles.css"/>
+        <link rel="stylesheet" href="includes/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="includes/css/realty.css"/>
+        <link rel="stylesheet" href="includes/css/styles.css" />
+        <link rel="stylesheet" href="includes/css/common.css" />
+        <link rel="stylesheet" href='components/com_shop/assets/css/common.css' />
+        <link rel="stylesheet" href='components/com_shop/assets/css/travelcon.css' />
+        <link rel="stylesheet" href='templates/v1/css/common.css' />
+        <link rel="stylesheet" href='templates/shop/css/common.css' />
+        
+        <script type="text/javascript" src="js/mootools.js"></script>
+        <script type="text/javascript" src="js/mootools.helper.js"></script>
+        <script type="text/javascript" src='js/app.js'></script>
+		<script type="text/javascript" src='js/app.interface.js'></script>
+		<script type="text/javascript" src='js/app.filesystem.js'></script>
+		<script type="text/javascript" src='js/app.localizer.js'></script>
+		<script type="text/javascript" src='includes/js/common.js'></script>
+		<script type="text/javascript" src='components/com_shop/assets/js/common.js'></script>					
+		<script type="text/javascript" src='components/com_shop/assets/js/common.inputs.js'></script>
+		<script type="text/javascript" src='components/com_shop/assets/js/app.store.js'></script>
+		<script type="text/javascript" src='components/com_shop/assets/js/client.js'></script>
+		<script type="text/javascript" src='components/com_shop/assets/js/extra.js'></script>
+		<script type="text/javascript" src='templates/shop/js/common.js'></script>
+		<script type="text/javascript" src='components/com_engine/assets/js/common.js'></script>
         <script type="text/javascript">        
+        	console.log('Waiting for device to get ready...');
         	document.addEventListener('deviceready', function(){
-        		//if (!$defined(window.$app)) {
-    				console.log('Loading App');
-					var endPoint = 'https://app.arka.asia/wizaya.app';
-					var scripts = [	
-						'js/mootools.js',
-						'js/mootools.helper.js',
-						'js/app.js',
-						'js/app.interface.js',
-						'js/app.filesystem.js',
-						'js/app.localizer.js'
-					];
-					function loadScripts(scripts,onComplete){
-						if (scripts.length){
-							var script = scripts.shift();
-							var head = document.getElementsByTagName('head')[0];
-							var el = document.createElement('script');
-							el.type = 'text/javascript';
-							el.onload = function(){
-								loadScripts(scripts,onComplete);
-							};
-							el.src = script;
-							head.appendChild(el);
-						} else {
-							onComplete();
-						}
-					}
-					
-					loadScripts(scripts,function(){
-						window.$app = new App.Loader(endPoint);	
-					});
-    				
-    			//} else {
-    			//	console.log('App already loaded');
-    			//}
+        		var endPoint = 'https://app.arka.asia/wizaya.appx';
+				console.log('Connecting to '+endPoint);
+				window.$app = new App.Loader(endPoint);
     		}, false); 
+    		
         </script>
         <script type="text/javascript" src="cordova.js"></script>
     </head>
@@ -99,5 +92,6 @@
 				</div>	
 			</div>
     	</div>
+    	
     </body>
 </html>

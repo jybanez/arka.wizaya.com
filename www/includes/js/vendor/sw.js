@@ -1,0 +1,1 @@
+importScripts('https://sdk.truepush.com/sdk/sw.js/?key=5d6ce946ff37b3f8557c4426')

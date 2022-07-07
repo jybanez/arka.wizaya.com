@@ -1,0 +1,70 @@
+.status.quote.pending_background {
+	background-color:#333;
+	color:#fff;
+}
+
+.status.quote.requote_background {
+	background-color:#de960a;
+	color:#fff;
+}
+
+.status.quote.forresponse_background {
+	background-color:#5D6696;
+	color:#fff;
+}
+.status.quote.forpayment_background {
+	background-color:#3C3176;
+	color:#fff;
+}
+.status.quote.paid_background {
+	background-color:#297C45;
+	color:#fff;
+}
+.status.quote.served_background {
+	background-color:#C9EA9C;
+	color:#000;
+	text-shadow: none;
+}
+.status.quote.expired_background {
+	background-color:#E36666;
+	color:#fff;
+}
+.status.quote.cancelled_background {
+	background-color:#f00;
+	color:#fff;
+}
+
+.quoteList .selectQuote.fa:before {
+	content:"\f10c";
+	color:#999999;
+}
+.quoteList li.active>* {
+	background-color:#CCFFCC !important;
+}
+.quoteList li.active .selectQuote.fa:before {
+	content:"\f058";
+	color:#050;
+}
+
+.btn.uploader {
+	background-position:center center;
+	background-repeat:no-repeat !important;
+}
+.uploading .btn.uploader>* {
+	visibility: hidden;
+}
+.uploading .btn.uploader {
+	background-color:#fff;
+	background-image:url(../images/loading2.gif);
+}
+
+.ticketContent {
+	display:none;
+}
+
+.hasTicket .ticketContent {
+	display:block;
+}
+.hasTicket .ticketControl {
+	display:none;
+}

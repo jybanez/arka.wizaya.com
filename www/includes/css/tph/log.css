@@ -1,0 +1,16 @@
+.logger {
+	overflow:auto;
+	font-size:11px;
+}
+
+.log {
+	padding:10px;
+	border-bottom:#ccc 1px solid;
+}
+
+.log-item {
+	display:inline-block;
+	white-space: pre;
+	padding:2px;
+	vertical-align: top;
+}
