@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.wizaya.arka" 
-	version="1.0.3" 
+	version="1.0.4" 
 	versionCode="" 
 	xmlns="http://www.w3.org/ns/widgets" 
 	xmlns:android="http://schemas.android.com/apk/res/android" 
@@ -130,7 +130,7 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-    <preference name="android-targetSdkVersion" value="30" />
+    <!--<preference name="android-targetSdkVersion" value="31" />-->
     <preference name="windows-target-version" value="10.0" />
     <preference name="phonegap-version" value="cli-9.0.0" />
     <preference name="StatusBarOverlaysWebView" value="false" />
@@ -146,7 +146,7 @@
     <plugin name="cordova-plugin-media-capture" />
     <plugin name="cordova-plugin-screen-orientation" />
     <plugin name="cordova-plugin-inappbrowser" />
-    <plugin name="cordova-plugin-whitelist" />
+    <!--<plugin name="cordova-plugin-whitelist" />-->
     <plugin name="cordova-plugin-dialogs" />
     <plugin name="cordova-plugin-file" />
     <plugin name="cordova-plugin-vibration" />
