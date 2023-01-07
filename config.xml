@@ -146,7 +146,7 @@
     <plugin name="cordova-plugin-media-capture" />
     <plugin name="cordova-plugin-screen-orientation" />
     <plugin name="cordova-plugin-inappbrowser" />
-    <plugin name="cordova-plugin-whitelist" />
+    <!--plugin name="cordova-plugin-whitelist" />-->
     <plugin name="cordova-plugin-dialogs" />
     <plugin name="cordova-plugin-file" />
     <plugin name="cordova-plugin-vibration" />
