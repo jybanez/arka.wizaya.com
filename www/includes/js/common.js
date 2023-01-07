@@ -610,63 +610,63 @@ $extend(TPH,{
 });
 
 TPH.Assets = {
-	Howl				:'includes/js/vendor/howler/howler.js',
-	QRCode				:'includes/js/vendor/qrcode.js',
-	Swiper				:['includes/js/swiper.js','includes/css/swiper.css'],
-	ZXing				:'includes/js/vendor/zxing.js',
+	Howl				:'/includes/js/vendor/howler/howler.js',
+	QRCode				:'/includes/js/vendor/qrcode.js',
+	Swiper				:['/includes/js/swiper.js','/includes/css/swiper.css'],
+	ZXing				:'/includes/js/vendor/zxing.js',
 	L					:[
-						'includes/js/leaflet.js',
+						'/includes/js/leaflet.js',
 						//'/includes/js/leaflet.mapcenter.js',
-						'includes/css/leaflet.css'],
-	XLSX				:'includes/js/vendor/xlsx.js',
-	canvasDatagrid		:'includes/js/vendor/canvas-datagrid.js',
-	EXIF				:'includes/js/vendor/exif.js',
-	libphonenumber		:'includes/js/vendor/libphonenumber.js',
-	opentype			:'includes/js/vendor/opentype.js',
-	LZString			:'includes/js/vendor/lz-string.js',
-	Print				:'includes/js/print.js',
+						'/includes/css/leaflet.css'],
+	XLSX				:'/includes/js/vendor/xlsx.js',
+	canvasDatagrid		:'/includes/js/vendor/canvas-datagrid.js',
+	EXIF				:'/includes/js/vendor/exif.js',
+	libphonenumber		:'/includes/js/vendor/libphonenumber.js',
+	opentype			:'/includes/js/vendor/opentype.js',
+	LZString			:'/includes/js/vendor/lz-string.js',
+	Print				:'/includes/js/print.js',
 	PageEditor			:[
-							'includes/js/grapes/grapes.min.js',
-							'includes/js/grapes/grapesjs-preset-webpage.min.js',
+							'/includes/js/grapes/grapes.min.js',
+							'/includes/js/grapes/grapesjs-preset-webpage.min.js',
 							'includes/css/grapes/grapes.css',
 							'includes/css/grapes/grapesjs-preset-webpage.min.css',
-							'includes/js/tph/page.editor.js',
-							'includes/css/tph/page.editor.css'
+							'/includes/js/tph/page.editor.js',
+							'/includes/css/tph/page.editor.css'
 						],
-	Codemirror			:['includes/js/codemirror/lib/codemirror.js','includes/css/codemirror.css'],
-	CodemirrorMode		:'includes/js/codemirror/addon/mode/loadmode.js',
-	CodemirrorMeta		:'includes/js/codemirror/mode/meta.js',
-	CSS					:'includes/js/tph/css.js',
-	DOM					:'includes/js/tph/dom.js',
-	CKEDITOR			:'includes/js/ckeditor/ckeditor.js',
-    Progressbar			:'includes/js/vendor/progressbar.js',
-	jsPDF				:'includes/js/vendor/jspdf.min.js',
-    jsPDFAutoTable		:'includes/js/vendor/jspdf/autotable.js',
-    DayPilot			:['includes/js/daypilot.js'],
-    CanvasJS			:'includes/js/canvasjs.min.js',
-    Calendar			:'includes/js/vendor/calendar.js',
-    NoSleep				:'includes/js/vendor/nosleep.js',
-    Hammer				:'includes/js/vendor/hammer.js',
-    RAF					:'includes/js/vendor/raf.js',
-    Editorjs			:'includes/js/vendor/editorjs.js',
-    MaterializeSocial	:'includes/css/materialize-social.css',
-    RollDate			:'includes/js/vendor/rolldate.js',
+	Codemirror			:['/includes/js/codemirror/lib/codemirror.js','/includes/css/codemirror.css'],
+	CodemirrorMode		:'/includes/js/codemirror/addon/mode/loadmode.js',
+	CodemirrorMeta		:'/includes/js/codemirror/mode/meta.js',
+	CSS					:'/includes/js/tph/css.js',
+	DOM					:'/includes/js/tph/dom.js',
+	CKEDITOR			:'/includes/js/ckeditor/ckeditor.js',
+    Progressbar			:'/includes/js/vendor/progressbar.js',
+	jsPDF				:'/includes/js/vendor/jspdf.min.js',
+    jsPDFAutoTable		:'/includes/js/vendor/jspdf/autotable.js',
+    DayPilot			:['/includes/js/daypilot.js'],
+    CanvasJS			:'/includes/js/canvasjs.min.js',
+    Calendar			:'/includes/js/vendor/calendar.js',
+    NoSleep				:'/includes/js/vendor/nosleep.js',
+    Hammer				:'/includes/js/vendor/hammer.js',
+    RAF					:'/includes/js/vendor/raf.js',
+    Editorjs			:'/includes/js/vendor/editorjs.js',
+    MaterializeSocial	:'/includes/css/materialize-social.css',
+    RollDate			:'/includes/js/vendor/rolldate.js',
     
-    HEREFlexiblePolyline:'includes/js/vendor/here/flexiblepolyline.js',
+    HEREFlexiblePolyline:'/includes/js/vendor/here/flexiblepolyline.js',
     
-    TPHGrid				:['includes/js/tph/grid.js','includes/css/tph/grid.css'],
-    TPHScrollbar		:['includes/js/tph/scrollbar.js','includes/css/tph/scrollbar.css'],
-    TPHWall				:['includes/js/tph/wall.js','includes/css/tph/wall.css'],
-    TPHTable			:['includes/js/tph/table.js','includes/css/tph/table.css'],
-    TPHSlide			:['includes/js/tph/slide.js'],
-    TPHProgress			:['includes/js/tph/progress.js'],
-    TPHTimeselect		:['includes/js/timeselect.js','includes/css/timeselect.css'],
-    TPHComponent		:['includes/js/tph/component.js'],
-    TPHTree				:['includes/js/tph/tree.js'],
-    TPHHTMLBuilder		:['includes/js/tph/html.builder.js'],
-    HLS					:['includes/js/vendor/hls.js'],
-    PanZoom				:['includes/js/vendor/panzoom.min.js'],
-    agGrid				:['includes/js/vendor/ag-grid-community.min.js']
+    TPHGrid				:['/includes/js/tph/grid.js','/includes/css/tph/grid.css'],
+    TPHScrollbar		:['/includes/js/tph/scrollbar.js','/includes/css/tph/scrollbar.css'],
+    TPHWall				:['/includes/js/tph/wall.js','/includes/css/tph/wall.css'],
+    TPHTable			:['/includes/js/tph/table.js','/includes/css/tph/table.css'],
+    TPHSlide			:['/includes/js/tph/slide.js'],
+    TPHProgress			:['/includes/js/tph/progress.js'],
+    TPHTimeselect		:['/includes/js/timeselect.js','/includes/css/timeselect.css'],
+    TPHComponent		:['/includes/js/tph/component.js'],
+    TPHTree				:['/includes/js/tph/tree.js'],
+    TPHHTMLBuilder		:['/includes/js/tph/html.builder.js'],
+    HLS					:['/includes/js/vendor/hls.js'],
+    PanZoom				:['/includes/js/vendor/panzoom.min.js'],
+    agGrid				:['/includes/js/vendor/ag-grid-community.min.js']
 };
 TPH.AssetsLoaded = new Array();
 TPH.AssetAlias = {
@@ -674,7 +674,6 @@ TPH.AssetAlias = {
 };
 
 TPH.loadAsset = function(library,onLoad) {
-	console.log('Load Asset '+library);
 	var library = $pick(TPH.AssetAlias[library],library);
 	//console.log(library,!$defined(window[library]) && !TPH.AssetsLoaded.contains(library));
 	if (!$defined(window[library]) || !TPH.AssetsLoaded.contains(library)) {
@@ -737,8 +736,6 @@ TPH.loadScript = function(url,onLoad,onError,doc,useCDN){
 		doc.$scripts = new Array();
 	}
 	var link = url.toURI();
-	console.log('Load Script '+link.toString());
-	/*
 	var servers = $pick(TPH.$servers,{});
 	if ($defined(servers.cdn) && $pick(useCDN,true)) {
 		var cdn = servers.cdn.toURI();
@@ -751,7 +748,7 @@ TPH.loadScript = function(url,onLoad,onError,doc,useCDN){
 		link.set('host',remote.get('host'));
 		link.set('port',null);
 	}
-	*/
+	
 	if (!doc.$scripts.contains(link.toString())) {
 		new Asset.javascript(link.toString(),{
 			onLoad:function(){	
@@ -760,7 +757,7 @@ TPH.loadScript = function(url,onLoad,onError,doc,useCDN){
 					onLoad();	
 				}
 			},
-			onError:onError,
+			//onError:onError,
 			document:doc
 		});	
 	} else if ($type(onLoad)=='function') {
@@ -774,8 +771,6 @@ TPH.loadStylesheet = function(url,onLoad,onError,doc,useCDN){
 		doc.$stylesheets = new Array();
 	}
 	var link = url.toURI();
-	console.log('Load Stylesheet '+link.toString());
-	/*
 	var servers = $pick(TPH.$servers,{});
 	if ($defined(servers.cdn) && $pick(useCDN,true)) {
 		var cdn = servers.cdn.toURI();
@@ -788,7 +783,7 @@ TPH.loadStylesheet = function(url,onLoad,onError,doc,useCDN){
 		link.set('host',remote.get('host'));
 		link.set('port',null);
 	}
-	*/
+
 	if (!doc.$stylesheets.contains(link.toString())) {
 		new Asset.css(link.toString(),{
 			onLoad:function(){
@@ -797,7 +792,7 @@ TPH.loadStylesheet = function(url,onLoad,onError,doc,useCDN){
 					onLoad();	
 				}
 			},
-			onError:onError,
+			//onError:onError,
 			document:doc
 		});
 	} else if ($type(onLoad)=='function') {
@@ -809,7 +804,6 @@ TPH.loadAssetFiles = function(files,onLoad){
 	if (files.length) {
 		var asset = files.shift();
 		var link = asset.toURI();
-		console.log('Load Asset File '+link.toString());
 		/*
 		if ($defined(TPH.$remote)) {
 			var remote = TPH.$remote.toURI();
@@ -823,8 +817,6 @@ TPH.loadAssetFiles = function(files,onLoad){
 			case 'js':
 				TPH.loadScript(link.toString(),function(){
 					TPH.loadAssetFiles.delay(200,null,[files,onLoad]);
-				},function(){
-					console.log('Unable to load Asset File '+link.toString());
 				});
 				/*
 				new Asset.javascript(link.toString(),{
@@ -837,8 +829,6 @@ TPH.loadAssetFiles = function(files,onLoad){
 			case 'css':
 				TPH.loadStylesheet(link.toString(),function(){
 					TPH.loadAssetFiles.delay(200,null,[files,onLoad]);
-				},function(){
-					console.log('Unable to load Asset File '+link.toString());
 				});
 				/*
 				new Asset.css(link.toString(),{
@@ -2119,6 +2109,7 @@ TPH.Ajax = new Class({
 		var request = new XMLHttpRequest();
 		request.addEventListener('load',function(e){
 			if (request.status==200) {
+			    this.$uploadRequest = null;
 				var ret = Json.decode(request.response);
 				$pick(onComplete,$empty)(ret);	
 			}
@@ -2134,6 +2125,7 @@ TPH.Ajax = new Class({
 		//request.responseType = 'json';
 		//request.setRequestHeader('Content-Type','multipart/form-data');
 		request.send(formData);
+		this.$uploadRequest = request;
 	},
 	onComplete:function(html){
 		if ($defined(this.container)){
@@ -2148,12 +2140,19 @@ TPH.Ajax = new Class({
 	isRunning:function(){
 		if ($defined(this.req)) {
 			return this.req.running;
-		} 
+		} else if ($defined(this.$uploadRequest)) {
+		    return true;
+		}
 		return false;		
 	},
 	cancel:function(){
-		if (this.req.running) {
-			this.req.cancel();
+		if (this.isRunning()) {
+		    if ($defined(this.req)) {
+		        this.req.cancel();    
+		    } else if ($defined(this.$uploadRequest)) {
+		        this.$uploadRequest.abort();
+		    }
+			
 			this.fireEvent('onCancel',[this]);
 		}		
 		return this;
@@ -4286,19 +4285,26 @@ TPH.Implementors.Templates = new Class({
         } else {
             template.$offsetY = 0;
             template.container.empty().setStyle('margin-top','');
+            var hasFilter = $type(template.filterFunction)=='function';
             for (var i=0;i<count;i++) {
                 var item = template.items[i];
-                if (!$defined(item.el)) {
-                    item.el = this.createTemplateElement(template,item.data).inject(template.container);
-                    //console.log(item.el.$elements);
-                    if ($type(item.onCreateElement)=='function') {
-                        item.onCreateElement(item.el,template,item.data);
-                    }    
-                    //this.initializeTemplateElementFocus(template,item);
+                var isVisible = hasFilter?template.filterFunction(item.data):true;
+                if (!isVisible) {
+                	if ($defined(item.el)) {
+                		item.el.remove();
+                	}
                 } else {
-                    item.el.inject(template.container);
+	                if (!$defined(item.el)) {
+	                    item.el = this.createTemplateElement(template,item.data).inject(template.container);
+	                    //console.log(item.el.$elements);
+	                    if ($type(item.onCreateElement)=='function') {
+	                        item.onCreateElement(item.el,template,item.data);
+	                    }    
+	                    //this.initializeTemplateElementFocus(template,item);
+	                } else {
+	                    item.el.inject(template.container);
+	                }
                 }
-                 
             }
         }
         
@@ -5291,6 +5297,90 @@ TPH.FileReader = new Class({
 	destroy:function(){
 		this.clear();
 	},
+	read_:function(files){
+		if (files.length) {
+			var file = files.pop();
+			this.parseFile(file,function(content,e){
+				var fileData = {
+					name:file.name,
+					size:file.size,
+					type:file.type,
+					ext:file.name.split('.').pop().toLowerCase(),
+					lastModified:file.lastModified,
+					content:content
+				};
+				console.log('Read Complete',fileData);
+				this.fireEvent('onReadFile',[fileData,this,e,file]);
+				this.content.push(fileData);
+				this.read(files);
+			}.bind(this));				
+		} else {
+			this.fireEvent('onComplete',[this.content,this]);
+		}
+	},
+	parseFile:function(file, callback) {
+		this.$file 		= file;
+	    this.$fileSize  = file.size;
+	    this.$chunkSize = 64 * 1024; // bytes
+	    this.$offset    = 0;
+		this.$results 	= new Array();
+	    // now let's start the read with the first block
+	    this.chunkReaderBlock(this.$offset, this.$chunkSize, this.$file, callback);
+	},
+	readEventHandler:function(evt,callback) {
+        if (evt.target.error == null) {
+            this.$offset += evt.target.result.length;
+            //console.log('Chunk',evt.target.result);
+            switch(this.options.mode){
+        		//case 'arraybuffer':
+        		//	this.$results.append(evt.target.result);
+        		//	break;
+    			default:
+    				this.$results.push(evt.target.result);
+    				break;
+    		}
+        } else {
+            console.log("Read error: " + evt.target.error);
+            return;
+        }
+        if (this.$offset >= this.$fileSize) {
+        	console.log("Done reading file");
+        	switch(this.options.mode){
+        		case 'arraybuffer':
+        			$pick(callback,$empty)(this.$results,evt);
+        			break;
+        		default:
+        			$pick(callback,$empty)(this.$results.join(''),evt);
+        			break;
+        	}
+        	
+        } else {
+        	this.chunkReaderBlock(this.$offset, this.$chunkSize, this.$file, callback);	
+        }        
+    },
+	chunkReaderBlock:function(offset, length, file, callback) {
+		console.log('Reading Chunck ',offset,length);
+        var reader = new FileReader();
+        var blob = file.slice(offset, length + offset);
+        reader.onloadend = function(evt){
+        	console.log(evt);
+        	//this.readEventHandler(evt,callback);
+        }.bind(this);
+        switch(this.options.mode){
+			case 'arraybuffer':
+				reader.readAsArrayBuffer(blob);
+				break;
+			case 'text':
+				reader.readAsText(blob);
+				break;
+			case 'binary':
+				reader.readAsBinaryString(blob);
+				break;
+			default:
+				reader.readAsDataURL(blob);
+				break;
+		}
+   	},
 	read:function(files){
 		if (files.length) {
 			var file = files.pop();
@@ -5413,6 +5503,9 @@ TPH.CameraPhotoCapture = new Class({
 		}
 	},
 	stop:function(){
+        if ($defined(this.$video)) {
+            this.$video.pause();
+        }
 		if ($defined(this.$stream)) {
 			var tracks = this.$stream.getTracks();
 			if ($defined(tracks)) {
@@ -5424,52 +5517,56 @@ TPH.CameraPhotoCapture = new Class({
 		return this;
 	},
 	getDevices:function(onGet,onFail){
-		var onFail = $pick(onFail,$empty);
-		this.fireEvent('onBeforeInitializeMedia',[this]);
-		navigator.mediaDevices.getUserMedia({
-			video:true
-		}).then(function(stream){
-			var tracks = stream.getVideoTracks();
-			if ($defined(tracks)) {
-				tracks.each(function(track){
-					track.stop();
-				});	
-			} 
-			this.fireEvent('onBeforeEnumerateMediaDevices',[this]);
-			navigator.mediaDevices.enumerateDevices().then(function (devices) {
-				var cameraDevices = new Array(),
-					mobile = {
-		        		1:'Front Camera',
-		        		2:'Back Camera',
-		        		3:'Back Camera (Wide-Angle)',
-		        		4:'Back Camera (Macro)'
-		        	};
-			    // https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/enumerateDevices
-			    devices.forEach(function (device) {
-			    	//deviceList.push(device);
-			        if (device.kind === 'videoinput') {
-			        	var index = cameraDevices.length+1;
-			        	var defaultLabel = 'Camera '+index;
-			            cameraDevices.push($merge(device,{
-			            	index:index,
-			            	label:device.label || ($defined(window.cordova)?$pick(mobile[index],defaultLabel):defaultLabel)
-			            }));
-			        }
-			    });
-			    
-			    console.log('Devices ',devices);
-				console.log('Camera Devicees ',cameraDevices);
-				if (!cameraDevices.length) {
-					onFail('onEmptyDevices','No Video Capture Device detected.');
-				} else if ($type(onGet)=='function') {
-					onGet(cameraDevices);					
-				}
-			}.bind(this)).catch(function(err){
-				onFail('onErrorEnumeratingMediaDevices','Unable to enumerate devices');
-			}.bind(this));	
-		}.bind(this)).catch(function(err){
-			onFail('onErrorInitializingMedia','Camera unsupported on this device');
-		}.bind(this));
+        if (!$defined(TPH.$cameraDevices)) {
+            var onFail = $pick(onFail,$empty);
+            this.fireEvent('onBeforeInitializeMedia',[this]);
+            navigator.mediaDevices.getUserMedia({
+                video:true
+            }).then(function(stream){
+                var tracks = stream.getVideoTracks();
+                if ($defined(tracks)) {
+                    tracks.each(function(track){
+                        track.stop();
+                    });	
+                } 
+                this.fireEvent('onBeforeEnumerateMediaDevices',[this]);
+                navigator.mediaDevices.enumerateDevices().then(function (devices) {
+                    TPH.$cameraDevices = new Array();
+                    var mobile = {
+                            1:'Front Camera',
+                            2:'Back Camera',
+                            3:'Back Camera (Wide-Angle)',
+                            4:'Back Camera (Macro)'
+                        };
+                    // https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/enumerateDevices
+                    devices.forEach(function (device) {
+                        //deviceList.push(device);
+                        if (device.kind === 'videoinput') {
+                            var index = TPH.$cameraDevices.length+1;
+                            var defaultLabel = 'Camera '+index;
+                            TPH.$cameraDevices.push($merge(device,{
+                                index:index,
+                                label:device.label || ($defined(window.cordova)?$pick(mobile[index],defaultLabel):defaultLabel)
+                            }));
+                        }
+                    });
+
+                    console.log('Devices ',devices);
+                    console.log('Camera Devicees ',TPH.$cameraDevices);
+                    if (!TPH.$cameraDevices.length) {
+                        onFail('onEmptyDevices','No Video Capture Device detected.');
+                    } else if ($type(onGet)=='function') {
+                        $pick(onGet,$empty)(TPH.$cameraDevices);					
+                    }
+                }.bind(this)).catch(function(err){
+                    onFail('onErrorEnumeratingMediaDevices','Unable to enumerate devices');
+                }.bind(this));	
+            }.bind(this)).catch(function(err){
+                onFail('onErrorInitializingMedia','Camera unsupported on this device');
+            }.bind(this));
+        } else {
+            $pick(onGet,$empty)(TPH.$cameraDevices);
+        }
 	},
 	stream:function(){
 		this.getDevices(function(cameraDevices){
@@ -6877,7 +6974,7 @@ TPH.Spreadsheet = new Class({
 	},
 	setContent:function(content){
 		TPH.loadAsset('XLSX',function(){
-			this.$workbook = XLSX.read(content,{type:'binary',raw:false});
+			this.$workbook = XLSX.read(content,{type:'arraybuffer',raw:false});
 			//console.log(this.$workbook);
 			this.render();
 		}.bind(this));	
