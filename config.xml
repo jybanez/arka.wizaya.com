@@ -160,10 +160,10 @@
     <plugin name="phonegap-plugin-speech-synthesis" spec="https://github.com/macdonst/SpeechSynthesisPlugin" />
     <!--<plugin name="cordova-plugin-androidx" />-->
     <!--<plugin name="cordova-plugin-androidx-adapter" />-->
-    <plugin name="cordova-httpd" spec="https://github.com/floatinghotpot/cordova-httpd.git" />
+    <!--<plugin name="cordova-httpd" spec="https://github.com/floatinghotpot/cordova-httpd.git" />-->
     <plugin name="cordova-plugin-local-notification" />
     <plugin name="cordova-plugin-app-version" />
-    <plugin name="cordova-plugin-contacts-x" spec="https://github.com/EinfachHans/cordova-plugin-contacts-x" />
+    <!--<plugin name="cordova-plugin-contacts-x" spec="https://github.com/EinfachHans/cordova-plugin-contacts-x" />-->
     <plugin name="cordova-plugin-iosrtc" />
     <plugin name="cordova-plugin-ios-xhr" spec="https://github.com/globules-io/cordova-plugin-ios-xhr" />
     <content src="index.html" />
