@@ -154,9 +154,9 @@ App.Localizer = new Class({
 					onSave(item,fileEntry);
 				}
 				this.fireEvent('onSave',[item,fileEntry,this]);
-				//console.log('Save File Success',fileEntry,item);
+				console.log('Save File Success',fileEntry,item);
 			}.bind(this),function(e){
-				//console.log('Save File Error',directory,file);
+				console.log('Save File Error',directory,file);
 				//console.log(e);
 				this.fireEvent('onSaveFileError',[directory,file,item,e,this]);
 			}.bind(this));	

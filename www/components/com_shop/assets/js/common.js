@@ -1,5 +1,5 @@
 /*
-(function(){
+(function(){	
 	$extend(TPH,{
 		loadScript:function(url,onLoad,onError,doc,useCDN){
 			var doc = $pick(doc,document);
@@ -171,7 +171,7 @@
 							document:doc
 						});
 					}
-				} else if ($type(onLoad)=='function') {
+				} else if ($type(onLoad)=='function') {                                                                                                                                                                                                     
 					onLoad();	
 				}	
 			});							
@@ -190,6 +190,11 @@ if ($defined(window.cordova) && !window.$mobileInitialized) {
 		console.log('Disabling WebView Overlay of Statusbar');
 		//StatusBar.overlaysWebView(false);
 	}
+
+	if ($defined(cordova.InAppBrowser)) {
+		window.open = cordova.InAppBrowser.open;
+	}
+	
 	window.$mobileInitialized = true;
 }
 Date.prototype.getWeekNumber = function(){
@@ -199,6 +204,45 @@ Date.prototype.getWeekNumber = function(){
   	var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
   	return Math.ceil((((d - yearStart) / 86400000) + 1)/7);
 };
+Request.implement({
+	onStateChange: function(){
+		var progressSupport = ('onprogress' in new Browser.Request);
+		var xhr = this.xhr;
+		if (xhr.readyState != 4 || !this.running) return;
+		this.running = false;
+		this.status = 0;
+		Function.attempt(function(){
+			var status = xhr.status;
+			this.status = (status == 1223) ? 204 : status;
+		}.bind(this));
+		xhr.onreadystatechange = $empty;
+		if (progressSupport) xhr.onprogress = xhr.onloadstart = $empty;
+		if (this.timer){
+			clearTimeout(this.timer);
+			delete this.timer;
+		}
+
+		this.response = ['','text'].contains(this.xhr.responseType)?{text: this.xhr.responseText || '', xml: this.xhr.responseXML}:this.xhr.response;
+		if (this.options.isSuccess.call(this, this.status))
+			if (['','text'].contains(this.xhr.responseType)) {
+				this.success(this.response.text, this.response.xml);
+			} else {
+				this.success(this.response);
+			}
+			
+		else
+			this.failure();
+	},
+	success: function(text, xml){
+		if (['','text'].contains(this.xhr.responseType)) {
+			this.onSuccess(this.processScripts(text), xml);
+			this.resolve({text: text, xml: xml});
+		} else {
+			this.onSuccess(text);
+			this.resolve(text);
+		}
+	}
+});
 var Shop = {
 	isMobileDevice:function() {
 	    return $defined(window.cordova); //(typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
@@ -1718,13 +1762,15 @@ Shop.List.Comments = new Class({
 		this.parent(container,options);
 		
 		this.form = container.getElement('form.commentForm');
-		this.form.addEvent('submit',function(e){
-			e.stop();
-			this.submit();
-			return false;
-		}.bind(this));
-		
-		this.comment = document.id(this.form.elements['comment']);
+		if ($defined(this.form)) {
+			this.form.addEvent('submit',function(e){
+				e.stop();
+				this.submit();
+				return false;
+			}.bind(this));
+			
+			this.comment = document.id(this.form.elements['comment']);	
+		}
 	},
 	init:function(){
 		this.toBottom(true);
@@ -2650,12 +2696,12 @@ Shop.Platform = new Class({
 			appIcon:'appIcon'
 		},
 		sounds:{
-			welcome:'media/notification/sounds/SoftBells.mp3',
-			alert:'media/notification/sounds/VibrantGameCouriousAlert3Winner.mp3',
-			error:'media/notification/sounds/YourTurn.mp3',
-			newItem:'media/notification/sounds/QuiteImpressed.mp3',
-			updateItem:'media/notification/sounds/Unconvinced.mp3',
-			shutter:'media/notification/sounds/shutter.mp3'
+			welcome:'/media/notification/sounds/SoftBells.mp3',
+			alert:'/media/notification/sounds/VibrantGameCouriousAlert3Winner.mp3',
+			error:'/media/notification/sounds/YourTurn.mp3',
+			newItem:'/media/notification/sounds/QuiteImpressed.mp3',
+			updateItem:'/media/notification/sounds/Unconvinced.mp3',
+			shutter:'/media/notification/sounds/shutter.mp3'
 		},
 		screenWidths:{
 			mobile:767
@@ -2889,7 +2935,10 @@ Shop.Platform = new Class({
 		                this.runUpdates(function(){
 		                	this.registry.autoload();
 		                }.bind(this));
-		                window.fireEvent('onPlatformReady',[this]);        
+						
+		                window.fireEvent('onPlatformReady',[this]);      
+						
+						this.checkAccountStatus();
 	                }.bind(this)
 	            }); 
             }.bind(this));
@@ -2899,6 +2948,60 @@ Shop.Platform = new Class({
 		
 		if ($type(onLaunch)){
 			onLaunch();
+		}
+	},
+	checkAccountStatus:function(){
+		if ($defined(TPH.$member)) {
+			switch(TPH.$member.am_status){
+				case 'inactive':
+					TPH.getWindow('__checkAccountStatus__',{
+						closable:false
+					}).open(function(win){
+						win.setCaption('System Message');
+						win.content.setStyles({'height':'','width':''});
+						new Element('div',{'class':'alertMessage'})
+									.injectInside(win.content)
+									.setStyles({'max-width':600})
+									.set('html','Your account is currently deactivated and is inaccessible.');
+						
+						var alertControls = new Element('li',{'class':'confirmControls'})
+								.injectInside(new Element('ul',{'class':'fieldList spaced border_top'}).injectInside(win.content));
+						
+						var messageControl = new Element('div',{'class':'controls padded align_right'}).injectInside(alertControls);
+
+						TPH.button('Reactivate Account',{'class':'btn secondary rounded padded_small'}).injectInside(messageControl)
+						.addEvent('click',function(e){
+							e.stop();
+							var url = new URI(Shop.instance.account.memberReactivateLink);
+							url.setData('session',TPH.$session);
+							window.open(url.toString());
+						});
+
+						TPH.button('Reload App',{'class':'btn primary rounded padded_small'}).injectInside(messageControl)
+						.addEvent('click',function(e){
+							e.stop();
+							window.location.reload();
+						});
+
+						win.toTop().toCenter();
+					}.bind(this),true);
+					break;
+					case 'purged':
+						TPH.getWindow('__checkAccountStatus__',{
+							closable:false
+						}).open(function(win){
+							win.setCaption('System Message');
+							win.content.setStyles({'height':'','width':''});
+							new Element('div',{'class':'alertMessage'})
+										.injectInside(win.content)
+										.setStyles({'max-width':600})
+										.set('html','Your account is currently being processed for deletion.<br />Your account is now inactive and inaccessible.');
+							
+	
+							win.toTop().toCenter();
+						}.bind(this),true);
+						break;
+			}
 		}
 	},
 	noSleep:function(stayup){
@@ -3274,9 +3377,13 @@ Shop.Platform = new Class({
 		                var autoloaded = $pick(this.account.startup,'0').toInt()?$pick(this.account.startup_list,[]):appList.autoloaded;
 		                this.registry.setApps(appList.items,autoloaded,appList.apps);
 		                this.registry.autoload();
+						
+						
 		                if ($type(onRestart)=='function') {
 		                    onRestart();
 		                }
+
+						this.checkAccountStatus();
 		            }.bind(this),true);
 		        }.bind(this),true);
         	}.bind(this));	
@@ -3288,7 +3395,8 @@ Shop.Platform = new Class({
 			'TPHTimeselect',
 			'TPHComponent',
 			'TPHTree',
-			'libphonenumber'
+			'libphonenumber',
+			'Zip'
 		],function(){
 			this.loadAccount(function(result){	
 	            console.log('Account Loaded');
@@ -3321,6 +3429,7 @@ Shop.Platform = new Class({
 						this.prepDevice();
 						this.loadNotifier();
 						window.fireEvent('platformReady',[this]);
+						
 						if ($type(onStart)=='function') {
 							onStart();
 						}	
@@ -3767,7 +3876,7 @@ Shop.Platform = new Class({
 					}	
 				}
 				
-				console.log('Notification Scan Plugins');
+				//console.log('Notification Scan Plugins');
 				for(pluginName in Shop.Plugin.$instances) {
 					//console.log(pluginName,Shop.Plugin.$instances[pluginName]);
 					var instance = Shop.Plugin.$instances[pluginName];
@@ -4221,6 +4330,17 @@ Shop.Platform.Profile = new Class({
 	testSpeak:function(){
 		Shop.instance.$voices.say('Hello');
 		//console.log('test');
+	},
+	deactivateAccount:function(){
+		var url = new URI(Shop.instance.account.memberDeactivateLink);
+		url.setData({session:TPH.$session});
+		window.open(url.toString());
+	},
+	deleteAccount:function(){
+
+	},
+	deleteAccountData:function(){
+
 	}
 });
 
@@ -4640,34 +4760,75 @@ Shop.Registry = new Class({
     	storage.clear();
     	return this;
     },
-	loadAppTemplates:function(appName,namespace,onLoad,container){
+	loadAppTemplates:function(appName,namespace,onLoad,onError,container){
 		var app = this.getApp(appName),
 			hasTemplates = false;
-			
+		
+
 		if ($defined(app)) {
+			var logo = app.data.logo;
 			var appData = $pick(app.data.technicals[namespace],{});
 			hasTemplates = $defined(appData.templates); 
 			if (hasTemplates) {
 				appData.templatesLoaded = false;
-				var progressOptions = {};
+				var templates = Object.keys(appData.templates);
+				var progressOptions = {
+					count:templates.length,
+					loaded:0,
+					progress:0
+				};
                 if ($defined(container)) {
                     var el = new Element('div',{
-                        'class':'font small padded'
+                        'class':'font small padded',
+						styles:{
+							height:'100%',
+							overflow:'hidden'
+						}
                     }).inject(container)
-                        .adopt(new Element('div').set('html','Getting ready. Please wait...'));
+                        .adopt(new Element('div').set('html','Getting ready. Please wait...'))
+						.adopt(new Element('div',{
+							styles:{
+								'background-image':'url('+logo+')',
+								'background-position':'center center',
+								'background-repeat':'no-repeat',
+								'background-size':'contain',
+								width:200,
+								height:200,
+								margin:'20px auto'
+							}
+						}))
+						;
                     $extend(progressOptions,{
                     	container:el,
                         progressBar:new ProgressBar.Line(new Element('div',{'class':''}).inject(el), {
-                            strokeWidth: 5,
+                            strokeWidth: 2,
                             color: '#FCB03C',
-                            duration: 500,
-                            easing: 'easeIn'
+							durtaion:10,
+							text:{
+								style:{
+									color: '#000',
+									position: 'absolute',
+									left: '50%',
+									top: '30px',
+									padding: 0,
+									margin: 0,
+									transform: {
+										prefix: true,
+										value: 'translate(-50%, 0)'
+									}
+								}
+								
+							},
+							step:function(state,bar,attachment){
+								bar.setText((bar.value()*100).round(2)+'%');
+							}
                         })
                     });
                 }  
-                if ($defined(progressOptions.progressBar)) {
-					progressOptions.progressBar.animate(0.1);	
-				}
+				
+                //if ($defined(progressOptions.progressBar)) {
+				//	progressOptions.progressBar.animate(0.1);	
+				//}
 				
 				//var storage = this.getStorage(namespace);
 				var loaded = false,
@@ -4675,22 +4836,31 @@ Shop.Registry = new Class({
 
 				if (!loaded) {
 					//console.log(namespace,Object.keys(appData.templates));
-					this.requestAppTemplates(appName,appData,namespace,Object.keys(appData.templates),function(){
-						appData.templatesLoaded = true;
-						//storage.set(appName,Json.encode(result));
-						if ($defined(progressOptions.progressBar)) {
-							progressOptions.progressBar.animate(1,function(){
-								progressOptions.progressBar.destroy();
-								delete(progressOptions.progressBar);
-								progressOptions.container.destroy();
-								if ($type(onLoad)=='function') {
-									onLoad(appName);
-								}	
-							}.bind(this));	
-						} else if ($type(onLoad)=='function') {
-							onLoad(appName);
-						}
-					}.bind(this));
+					//console.log('Templates',progressOptions.count,appData.templates);
+					if ($defined(progressOptions.progressBar)) {
+						progressOptions.progressBar.animate(0.5,function(){
+							this.generateAppTemplates(appName,appData,namespace,templates,function(){
+								appData.templatesLoaded = true;
+								progressOptions.progressBar.setText('100%');
+								progressOptions.progressBar.animate(1,function(){
+									progressOptions.progressBar.destroy();
+									delete(progressOptions.progressBar);
+									progressOptions.container.destroy();
+									if ($type(onLoad)=='function') {
+										onLoad(appName);
+									}	
+								}.bind(this));	
+							}.bind(this),onError,progressOptions);
+						}.bind(this));
+					} else {
+						this.generateAppTemplates(appName,appData,namespace,templates,function(){
+							appData.templatesLoaded = true;
+							if ($type(onLoad)=='function') {
+								onLoad(appName);
+							}
+						}.bind(this),onError,progressOptions);
+					}
+					
 				}
 			}
 		}
@@ -4699,7 +4869,63 @@ Shop.Registry = new Class({
             onLoad(appName);
         }
 	},
-	requestAppTemplates:function(appName,appData,namespace,templates,onComplete){
+	generateAppTemplates:function(appName,appData,namespace,templates,onComplete,onError,progressOptions){
+		var data = {
+			option:'com_shop',
+			task:'generatetemplates',
+			format:'json',
+			appName:appName,
+			namespace:namespace,
+			templates:appData.templates
+		};
+		if ($defined(TPH.$session)) {
+			data.session = TPH.$session;
+		}
+		if ($defined(TPH.$token)) {
+			data[TPH.$token]=1;
+		}
+
+		new TPH.Json({
+			method:'post',
+			data:data,
+			onComplete:function(content){
+				//console.log(content);
+				var storeKey = namespace=='plugins'?[namespace,this.options.platform].join('.'):namespace;
+				var templateStorage = this.getStorage(storeKey);
+				var templateStored = $pick(templateStorage.get(appName),{});
+				//var indexStorage = this.getStorage(storeKey+'.index');
+				//var indexAppId = indexStorage.get(appName);
+				//console.log(appName,indexAppId,content.id);
+				if (templateStored.id!=content.id) {
+					//indexStorage.set(appName,content.id);
+					appData.templates = content.templates;
+					templateStorage.set(appName,content);
+				} else {
+					appData.templates = templateStored.templates;
+				}
+
+				$pick(onComplete,$empty)();
+				/*
+				var reader = new zip.ZipReader(new zip.TextReader(blob));
+				console.log('Loaded Templates for '+namespace+'-'+appName);
+				reader.getEntries().then(function(entries){
+					console.log(entries);
+				});
+				*/
+			}.bind(this),
+			onFailure:function(){
+				TPH.confirm('System Message','Unable to download App resources.<br />Please make sure your internet connection is stable.',function(){
+					this.generateAppTemplates(appName,appData,namespace,templates,onComplete,onError,progressOptions);
+				}.bind(this),onError,$empty,{
+					okText:'Try Again',
+					cancelText:'Close',
+					messageClass:'alertMessage'
+				});
+			}.bind(this)
+		}).request();
+	},
+	/*
+	requestAppTemplates:function(appName,appData,namespace,templates,onComplete,onError,progressOptions){
 		if (templates.length){
 			var storeKey = namespace=='plugins'?[namespace,this.options.platform].join('.'):namespace;
 			var template = templates.shift();
@@ -4708,7 +4934,7 @@ Shop.Registry = new Class({
 			var storage = this.getStorage(storeKey);
 			if (storage.has(id)) {
 				appData.templates[template] = storage.get(id);
-				this.requestAppTemplates(appName,appData,namespace,templates,onComplete);
+				this.requestAppTemplates(appName,appData,namespace,templates,onComplete,onError,progressOptions);
 			} else {
 				var link = appData.templates[template].toURI();
 				var servers = $pick(TPH.$servers,{});
@@ -4724,23 +4950,47 @@ Shop.Registry = new Class({
 					link.set('port',null);
 				}
 				var url = link.toString();
-				new Request({
-					url:url,
-					method:'GET',
-					headers:{
-						'Cache-Control':'max-stale'
-					},
-					onSuccess:function(result){
-						appData.templates[template] = result;
-						storage.set(id,result);
-						this.requestAppTemplates(appName,appData,namespace,templates,onComplete);
-					}.bind(this)
-				}).send();	
+				this.requestAppTemplate(url,function(result){
+					appData.templates[template] = result;
+					storage.set(id,result);
+					progressOptions.loaded++;
+					progressOptions.progress = progressOptions.loaded/progressOptions.count;
+					console.log('Loaded',progressOptions.progress);
+					if ($defined(progressOptions.progressBar)) {
+						progressOptions.progressBar.setText((progressOptions.progress*100).round(2)+'%');
+						progressOptions.progressBar.animate(progressOptions.progress,function(){
+							this.requestAppTemplates(appName,appData,namespace,templates,onComplete,onError,progressOptions);	
+						}.bind(this));	
+					} else {
+						this.requestAppTemplates(appName,appData,namespace,templates,onComplete,onError,progressOptions);
+					}
+				}.bind(this),onError);
+					
 			}
 		} else if ($type(onComplete)){
 			onComplete();
 		}
 	},
+	requestAppTemplate:function(url,onSuccess,onError){
+		new Request({
+			url:url,
+			method:'GET',
+			headers:{
+				'Cache-Control':'max-stale'
+			},
+			onSuccess:onSuccess,
+			onFailure:function(req){
+				TPH.confirm('System Message','Unable to download App resources.<br />Please make sure your internet connection is stable.',function(){
+					this.requestAppTemplate(url,onSuccess);
+				}.bind(this),onError,$empty,{
+					okText:'Try Again',
+					cancelText:'Close',
+					messageClass:'alertMessage'
+				});
+			}.bind(this)
+		}).send();
+	},
+	*/
 	getApp:function(appName){
 		return this.$items[appName];
 	},
@@ -4787,7 +5037,7 @@ Shop.Registry = new Class({
 			this.refresh();
 		}
 	},
-	_createInstance:function(appName,appContainer,onCreate){
+	_createInstance:function(appName,appContainer,onCreate,onError){
         var app = this.getApp(appName);
         //console.log(app);
         //console.log(this.getApp(appName));
@@ -4864,7 +5114,7 @@ Shop.Registry = new Class({
 		}
 		
 	},
-	createInstance:function(appName,onCreate){
+	createInstance:function(appName,onCreate,onError){
 		this.$menu.close();
 		var app = this.getApp(appName); //$pick(app,this.currentApp);
         //console.log(app);
@@ -4885,7 +5135,10 @@ Shop.Registry = new Class({
                     }          
                 }  
                 this._createInstance(appName,appContainer,onCreate);
-            }.bind(this),container);
+            }.bind(this),function(){
+				//On Error on loading App Templates
+				appContainer.close();
+			}.bind(this),container);
         } else {
             container.empty();
             this._createInstance(appName,appContainer,onCreate);
@@ -5346,7 +5599,8 @@ Shop.App = new Class({
 			},{
 				onComplete:function(result){
 					if (result.status) {
-						$extend(this.app,result.data);
+					    this.app.online = result.data.online;
+						//$extend(this.app,result.data);
 						this.fireEvent('onChangeAppOnlineStatus',[result.data.online,result.data,this]);	
 						Shop.instance.getNotifier().publish(['onChangeAppOnlineStatus'].join('-').clean(),{
 							app:result.data.app,
@@ -7200,6 +7454,7 @@ Shop.App.CommoditySelect = new Class({
 		TPH.Implementors.ActiveRequest
 	],
 	options:{
+		searchKey:'name',
 		request:{
 			controller:'commodities'
 		}
@@ -9544,10 +9799,9 @@ Shop.Voices = new Class({
 					this.$voices = window.speechSynthesis.getVoices();
 			    	console.log('Voices : Loaded '+this.$voices.length+' voices.');
 			   	}.bind(this));	
-			} else if ($type(window.speechSynthesis.getVoices)=='function'){
+			} else {
 				this.$voices = window.speechSynthesis.getVoices();	
-				//console.log(this.$voices);
-				console.log('Voices : Loaded '+this.getVoices().length+' voices.');
+				console.log('Voices : Loaded '+this.$voices.length+' voices.');
 			}
 		}.bind(this));
 	},
@@ -9713,7 +9967,7 @@ Shop.Realtime.Ably = new Class({
 				});
 				//console.log('Realtime Message from '+data.senderId);
 				//if (!this.$index.contains(data.hash)) {
-					console.log('onReceiveMessage',msg);
+					//console.log('onReceiveMessage',msg);
 					this.fireEvent('onReceiveMessage',[msg,this]);	
 				//}	
 			} else {

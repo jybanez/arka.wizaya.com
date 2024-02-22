@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.wizaya.arka" 
-	version="1.0.5" 
-	versionCode="" 
-	xmlns="http://www.w3.org/ns/widgets" 
-	xmlns:android="http://schemas.android.com/apk/res/android" 
-	xmlns:gap="http://phonegap.com/ns/1.0">
+		version="1.0.6" 
+		versionCode="" 
+		xmlns="http://www.w3.org/ns/widgets" 
+		xmlns:android="http://schemas.android.com/apk/res/android" 
+		xmlns:gap="http://phonegap.com/ns/1.0">
     <name>ARKA</name>
-    <description>ARKA</description>
+    <description>Official ARKA App</description>
     <author email="support@wizaya.com" href="http://www.wizaya.com">Tech Project Hive - Wizaya Division</author>
     <feature name="http://api.phonegap.com/1.0/battery" />
     <feature name="http://api.phonegap.com/1.0/camera" />
@@ -84,21 +84,33 @@
             <uses-permission android:name="android.permission.CAPTURE_VIDEO_OUTPUT" />
             <uses-permission android:name="android.permission.CAPTURE_SECURE_VIDEO_OUTPUT" />
             <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT " />
+            <!--
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+            -->
+
             <uses-feature android:name="android.hardware.camera" />
             <uses-feature android:name="android.hardware.camera.autofocus" />
-            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
         </config-file>
         <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity[@android:name='MainActivity']">
             <activity android:name="MainActivity" android:windowSoftInputMode="adjustPan" />
+            <!--
+            <application android:requestLegacyExternalStorage="true" />
+            -->
         </edit-config>
         
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screen/android/splash-port-xxxhdpi.png"/>
+        <preference name="AndroidWindowSplashScreenBackground" value="#ffffff"/>    
         <preference name="SplashMaintainAspectRatio" value="true" />
         <preference name="SplashShowOnlyFirstTime" value="true" />
         <preference name="AndroidLaunchMode" value="singleTask" />
+        <!--
         <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+        -->
         <preference name="AndroidXEnabled" value="true" />
-    	<preference name="android-targetSdkVersion" value="31" />
-    	<preference name="android-compileSdkVersion" value="31" />
+    	<preference name="android-targetSdkVersion" value="33" />
+    	<preference name="android-compileSdkVersion" value="33" />
     
         <icon density="ldpi" src="res/icon/android/ldpi.png" />
         <icon density="mdpi" src="res/icon/android/mdpi.png" />
@@ -106,6 +118,7 @@
         <icon density="xhdpi" src="res/icon/android/xhdpi.png" />
         <icon density="xxhdpi" src="res/icon/android/xxhdpi.png" />
         <icon density="xxxhdpi" src="res/icon/android/xxxhdpi.png" />
+        
         <splash density="port-ldpi" src="res/screen/android/splash-port-ldpi.png" />
         <splash density="port-mdpi" src="res/screen/android/splash-port-mdpi.png" />
         <splash density="port-hdpi" src="res/screen/android/splash-port-hdpi.png" />
@@ -164,10 +177,10 @@
     <!--<plugin name="cordova-plugin-androidx" />-->
     <!--<plugin name="cordova-plugin-androidx-adapter" />-->
     <!--<plugin name="cordova-httpd" spec="https://github.com/floatinghotpot/cordova-httpd.git" />-->
-    <plugin name="cordova-plugin-local-notification-12" />
+    <plugin name="cordova-plugin-local-notification" spec="https://github.com/ZarishIqbal/cordova-local-notifications-plugin" />
     <plugin name="cordova-plugin-app-version" />
     <!--<plugin name="cordova-plugin-contacts-x" spec="https://github.com/EinfachHans/cordova-plugin-contacts-x" />-->
     <plugin name="cordova-plugin-iosrtc" />
-    <plugin name="cordova-plugin-ios-xhr" spec="https://github.com/globules-io/cordova-plugin-ios-xhr" />
+    <!--<plugin name="cordova-plugin-ios-xhr" spec="https://github.com/globules-io/cordova-plugin-ios-xhr" />-->
     <content src="index.html" />
 </widget>
