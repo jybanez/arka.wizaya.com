@@ -1,3 +1,4 @@
+window.FileBlob = window.File;
 (function(){
 	Events.implement({
 	    /*
@@ -2019,7 +2020,7 @@ TPH.Ajax = new Class({
 		var count = this.$attachment.files.length;
 		for(var i=0;i<count;i++) {
 			var file = this.$attachment.files[i];
-			attachments.push(new File([file],file.name,{type:file.type}));
+			attachments.push(new FileBlob([file],file.name,{type:file.type}));
 		}
 		this.fireEvent('onBeforeSendAttachments',[attachments,this]);
 		this.$attachments = new Array();
