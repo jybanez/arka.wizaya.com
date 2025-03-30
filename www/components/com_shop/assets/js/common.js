@@ -179,6 +179,7 @@
 	});
 })();
 */
+
 if ($defined(window.cordova) && !window.$mobileInitialized) {
 	console.log('Initialize Mobile Native Functions');
 	
@@ -4337,10 +4338,14 @@ Shop.Platform.Profile = new Class({
 		window.open(url.toString());
 	},
 	deleteAccount:function(){
-
+		var url = new URI(Shop.instance.account.memberDeleteLink);
+		url.setData({session:TPH.$session});
+		window.open(url.toString());
 	},
 	deleteAccountData:function(){
-
+		var url = new URI(Shop.instance.account.memberPurgeLink);
+		url.setData({session:TPH.$session});
+		window.open(url.toString());
 	}
 });
 
@@ -4888,6 +4893,9 @@ Shop.Registry = new Class({
 		new TPH.Json({
 			method:'post',
 			data:data,
+			notices:{
+				noConnection:false
+			},
 			onComplete:function(content){
 				//console.log(content);
 				var storeKey = namespace=='plugins'?[namespace,this.options.platform].join('.'):namespace;
@@ -5323,6 +5331,7 @@ Shop.Registry = new Class({
 			if ($defined(assetLoader)) {
 				Shop.localize(url.toString(),function(url){
 					new assetLoader(url,{
+						crossOrigin:'anonymous',
 						onLoad:function(){
 							this.loadAssets(assets,onComplete);
 						}.bind(this)
@@ -7132,6 +7141,7 @@ Shop.App.SupplierSelect = new Class({
 				win.content.empty();	
 			}.bind(this)
 		}).open(function(win){
+			//var selectName = this.getName();
 			this.$supplierForm = new Shop.Forms.Supplier(win.content,{
 				data:this.getParams(),
 				template:this.options.templates.form,
@@ -7145,7 +7155,8 @@ Shop.App.SupplierSelect = new Class({
 					win.startSpin();
 				},
 				onSave:function(data){
-					Shop.App[this.getName()].$items.push(data);
+					this.addItem(data);
+					//Shop.App[selectName].$items.push(data);
 					this.list();
 					this.fireEvent('onSelect',[data,this]);
 					win.stopSpin();
@@ -9451,11 +9462,14 @@ Shop.GPS = new Class({
 				TPH.$gpsError = null;
 				this.$watchId = navigator.geolocation.watchPosition(function(position){
 					if ($defined(position.coords.latitude) && $defined(position.coords.longitude)) {
-						var coords = $merge(position.coords,{
+						this.setCurrentPosition.debounce(this,500,[{
+							accuracy:position.coords.accuracy,
+							altitude:position.coords.altitude,
+							heading:position.coords.heading,
+							speed:position.coords.speed,
 							latitude:position.coords.latitude.round(this.options.precision),
 							longitude:position.coords.longitude.round(this.options.precision)
-						});
-						this.setCurrentPosition.debounce(this,500,[coords]);	
+						}]);	
 					}
 					if ($type(onStart)=='function') {
 						onStart();
@@ -9947,7 +9961,7 @@ Shop.Realtime.Ably = new Class({
 			var data = msg.data,
 				name = msg.name;
 				//console.log(msg);
-			if ($defined(data)) {
+			if ($defined(data) && $defined(name)) {
 				switch(msg.clientId){
 					case 'server':
 						//name = name.base64_decode();

@@ -1106,14 +1106,27 @@ ul.timeline.vertical>li:before {
 	background:#42a35a;
 	border:#fff 4px solid;
 	margin-left:-9px;
+	margin-top:1em;
+	z-index: 1;
+	box-shadow: 0 0 4px #42a35a;
+}
+ul.timeline.vertical>li:after {
+	position:absolute;
+	content:" ";
+	display:block;
+	background:#42a35a;
+	width:2px;
+	top:2.4em;
+	left:0;
+	height:calc(100%);
 }
 ul.timeline.vertical>li .content {
-	padding:0 1em 2em 2em;
-	border-left:#42a35a 2px solid;
+	padding:1em 2em;
 }
-ul.timeline.vertical>li:last-of-type .content {
-	border-left:none;
+ul.timeline.vertical>li:last-of-type:after {
+	display:none;
 }
+
 ul.timeline.vertical>li label {
 	color:#666;
 	font-weight:bold;

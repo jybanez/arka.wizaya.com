@@ -75,6 +75,13 @@
            	
 	        this.checkRequest = new TPH.Ajax({
 	            data:params,
+				noConnection:function(message){
+					TPH.confirm('System Message','Unable to connect to server. Please check your internet connection.',function(){
+						this.check(onCheck,onFailure);
+					}.bind(this),$empty,$empty,{
+						okText:'Retry'
+					});
+				}.bind(this),
 	            onComplete:function(html){	            	
 	            	//console.log(html);
 	            	//console.log(html.base64_decode());

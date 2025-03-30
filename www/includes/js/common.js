@@ -1,4 +1,5 @@
 window.FileBlob = window.File;
+
 (function(){
 	Events.implement({
 	    /*
@@ -669,7 +670,13 @@ TPH.Assets = {
     PanZoom				:['includes/js/vendor/panzoom.min.js'],
     agGrid				:['includes/js/vendor/ag-grid-community.min.js'],
 	JSZip				:['includes/js/vendor/jszip.js'],
-	Zip					:['includes/js/vendor/zip.js']
+	Zip					:['includes/js/vendor/zip.js'],
+	
+	HtmlToImage			:['includes/js/vendor/html-to-image.js'],
+	ReceiptPrinterEncoder		:['includes/js/vendor/receipt-printer-encoder.js'],
+	WebBluetoothReceiptPrinter	:['includes/js/vendor/webbluetooth-receipt-printer.umd.js'],
+	WebUSBReceiptPrinter		:['includes/js/vendor/webusb-receipt-printer.umd.js'],
+	WebSerialReceiptPrinter		:['includes/js/vendor/webserial-receipt-printer.umd.js']
 };
 TPH.AssetsLoaded = new Array();
 TPH.AssetAlias = {
@@ -754,6 +761,7 @@ TPH.loadScript = function(url,onLoad,onError,doc,useCDN){
 	
 	if (!doc.$scripts.contains(link.toString())) {
 		new Asset.javascript(link.toString(),{
+			crossOrigin:'anonymous',
 			onLoad:function(){	
 				doc.$scripts.push(link.toString());
 				if ($type(onLoad)=='function') {
@@ -789,6 +797,7 @@ TPH.loadStylesheet = function(url,onLoad,onError,doc,useCDN){
 
 	if (!doc.$stylesheets.contains(link.toString())) {
 		new Asset.css(link.toString(),{
+			crossOrigin:'anonymous',
 			onLoad:function(){
 				doc.$stylesheets.push(link.toString());
 				if ($type(onLoad)=='function') {
@@ -2076,7 +2085,7 @@ TPH.Ajax = new Class({
 	sendAttachmentChunk:function(file,chunk,chunkIndex,totalChunks,onComplete,onFailure){
 		var formData = new FormData();
 		var data = {
-				id:TPH.$session+'-'+TPH.MD5(file.name),
+				id:TPH.$session+'-'+TPH.MD5([file.name,file.size,file.type].join('-')),
 				file:file.name,
 				index:chunkIndex,
 				total:totalChunks
@@ -2118,7 +2127,13 @@ TPH.Ajax = new Class({
 			}
 		}.bind(this));
 		request.addEventListener('error',function(){
-			$pick(onFailure,$empty)();
+			TPH.confirm('System Message','File uploading error. Please make sure your internet connection is stable.',function(){
+				this.sendAttachmentChunk(file,chunk,chunkIndex,totalChunks,onComplete,onFailure);
+			}.bind(this),onFailure,$empty,{
+				messageClass:'alertMessage',
+				okText:'Try Again'
+			});
+			//$pick(onFailure,$empty)();
 		}.bind(this));
 		request.upload.addEventListener('progress',function(e){
             var p = e.loaded / e.total;
@@ -4593,12 +4608,19 @@ if (typeof(window.localStorage) !== "undefined") {
   			this.setOptions(options); 
   		},
   		compress:function(data){
-  			var jsonstring = '';
   			try { 
-  				jsonstring = Json.encode(data);
-  				return LZString.compressToUTF16(jsonstring);
+				//console.trace('Encoding for Compression',data);
+				var jsonstring = $defined(data.toJSON)?data.toJSON():Json.encode(data);
+				try {
+					//console.log(jsonstring);
+  					return LZString.compressToUTF16(jsonstring);
+				} catch(e){
+					console.log('Compression Error for storage '+this.id,e);	
+				}
+  				
   			} catch(e) {
-  				console.log('Compression Error for storage '+this.id,e);
+				console.log('Problem encoding data for compression');
+  				
   			}
   			return '{}';
   		},

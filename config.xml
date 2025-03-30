@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.wizaya.arka" 
-		version="1.0.8" 
+		version="1.0.9" 
 		versionCode="" 
 		xmlns="http://www.w3.org/ns/widgets" 
 		xmlns:android="http://schemas.android.com/apk/res/android" 
@@ -214,6 +214,7 @@
     <plugin name="skwas-cordova-plugin-appinfo" />
     <plugin name="cordova-plugin-android-packagemanager" specs="https://github.com/jybanez/cordova-plugin-android-packagemanager" />
     <plugin name="cordova-plugin-fingerprint-aio" />
-    <plugin name="cordova-plugin-printer" specs="https://github.com/elvar-dk/cordova-plugin-printer" />
+    <!-- <plugin name="cordova-plugin-printer" specs="https://github.com/elvar-dk/cordova-plugin-printer" /> -->
+    <plugin name="cordova-plugin-bluetoothle" specs="https://github.com/gregor-srdic/cordova-plugin-bluetoothle" />
     <content src="index.html" />
 </widget>
