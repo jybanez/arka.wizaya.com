@@ -202,10 +202,6 @@
     <plugin name="cordova-plugin-local-notification" spec="https://github.com/ZarishIqbal/cordova-local-notifications-plugin" />
     <plugin name="cordova-plugin-app-version" />
     <!--<plugin name="cordova-plugin-contacts-x" spec="https://github.com/EinfachHans/cordova-plugin-contacts-x" />-->
-    <!--
-    <plugin name="cordova-plugin-wkwebview-engine" />
-    <plugin name="cordova-plugin-wkwebview-file-xhr" spec="~2.1.4" />
-    -->
     <plugin name="cordova-plugin-iosrtc" />
     <!--<plugin name="cordova-plugin-ios-xhr" spec="https://github.com/globules-io/cordova-plugin-ios-xhr" />-->
     <plugin name="cordova-plugin-intent-list" spec="https://github.com/nick-denry/cordova-plugin-intent-list" />
