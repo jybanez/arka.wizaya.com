@@ -410,6 +410,7 @@ var App = {
 						if ($defined(styleUrl)) {
 							console.log(data.stylesheet,styleUrl);
 							new Asset.css(styleUrl,{
+								crossOrigin:'anonymous',
 								onload:function(){
 									new Element('style',{
 										type:'text/css'
@@ -422,6 +423,7 @@ var App = {
 							if ($defined(scriptUrl)) {
 								console.log(data.script,scriptUrl);
 								new Asset.javascript(scriptUrl,{
+									crossOrigin:'anonymous',
 									onload:function(){
 										console.log('Script loaded.');
 										$extend(TPH,{
