@@ -169,7 +169,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     
-    <engine name="android" spec="^12.0.0" />
+    <engine name="android" spec="12.0.0" />
 
     <preference name="windows-target-version" value="10.0" />
     <preference name="phonegap-version" value="cli-9.0.0" />
