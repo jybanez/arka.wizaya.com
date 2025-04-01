@@ -212,6 +212,7 @@
     <plugin name="cordova-plugin-android-packagemanager" specs="https://github.com/jybanez/cordova-plugin-android-packagemanager" />
     <plugin name="cordova-plugin-fingerprint-aio" />
     <!-- <plugin name="cordova-plugin-printer" specs="https://github.com/elvar-dk/cordova-plugin-printer" /> -->
-    <plugin name="cordova-plugin-bluetoothle" specs="https://github.com/gregor-srdic/cordova-plugin-bluetoothle" />
+    <!-- <plugin name="cordova-plugin-bluetoothle" specs="https://github.com/gregor-srdic/cordova-plugin-bluetoothle" /> -->
+    <plugin name="cordova-plugin-bluetoothle" />
     <content src="index.html" />
 </widget>
