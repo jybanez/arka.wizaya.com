@@ -213,6 +213,6 @@
     <plugin name="cordova-plugin-fingerprint-aio" />
     <!-- <plugin name="cordova-plugin-printer" specs="https://github.com/elvar-dk/cordova-plugin-printer" /> -->
     <!-- <plugin name="cordova-plugin-bluetoothle" specs="https://github.com/gregor-srdic/cordova-plugin-bluetoothle" /> -->
-    <plugin name="cordova-plugin-bluetoothle" />
+    <plugin name="cordova-plugin-ble-central" />
     <content src="index.html" />
 </widget>
