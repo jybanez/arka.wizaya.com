@@ -676,7 +676,8 @@ TPH.Assets = {
 	ReceiptPrinterEncoder		:['includes/js/vendor/receipt-printer-encoder.js'],
 	WebBluetoothReceiptPrinter	:['includes/js/vendor/webbluetooth-receipt-printer.umd.js'],
 	WebUSBReceiptPrinter		:['includes/js/vendor/webusb-receipt-printer.umd.js'],
-	WebSerialReceiptPrinter		:['includes/js/vendor/webserial-receipt-printer.umd.js']
+	WebSerialReceiptPrinter		:['includes/js/vendor/webserial-receipt-printer.umd.js'],
+	SignaturePad		:['includes/js/vendor/signature_pad.umd.min.js']
 };
 TPH.AssetsLoaded = new Array();
 TPH.AssetAlias = {
