@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.wizaya.arka" 
-		version="1.0.9" 
+		version="1.0.10" 
 		versionCode="" 
 		xmlns="http://www.w3.org/ns/widgets" 
 		xmlns:android="http://schemas.android.com/apk/res/android" 
@@ -95,16 +95,6 @@
             <uses-permission android:name="android.permission.CAPTURE_VIDEO_OUTPUT" />
             <uses-permission android:name="android.permission.CAPTURE_SECURE_VIDEO_OUTPUT" />
             <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT " />
-
-            <!--
-            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" android:maxSdkVersion="28" />
-            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" android:maxSdkVersion="30" />
-            <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
-            -->
-            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
-            <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" />
-            <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-
             
             <!--
             <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
@@ -115,6 +105,10 @@
             <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
             <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
             -->
+
+            <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+            <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+            <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
             <uses-feature android:name="android.hardware.camera" />
             <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -135,12 +129,11 @@
         <preference name="SplashMaintainAspectRatio" value="true" />
         <preference name="SplashShowOnlyFirstTime" value="true" />
         <preference name="AndroidLaunchMode" value="singleTask" />
-        
+        <!--
+        <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+        -->
         <preference name="AndroidXEnabled" value="true" />
-    	<preference name="android-minSdkVersion" value="29" />
-        <preference name="android-targetSdkVersion" value="34" />
-        <preference name="android-compileSdkVersion" value="34" />
-    
+
         <icon density="ldpi" src="res/icon/android/ldpi.png" />
         <icon density="mdpi" src="res/icon/android/mdpi.png" />
         <icon density="hdpi" src="res/icon/android/hdpi.png" />
@@ -179,8 +172,8 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     
-    <engine name="android" spec="12.0.0" />
-
+    <preference name="android-targetSdkVersion" value="35" />
+    <preference name="android-compileSdkVersion" value="35" />
     <preference name="windows-target-version" value="10.0" />
     <preference name="phonegap-version" value="cli-9.0.0" />
     <preference name="StatusBarOverlaysWebView" value="false" />
@@ -190,8 +183,6 @@
     <preference name="AllowInlineMediaPlayback" value="true" />
     <preference name="cordova.plugins.diagnostic.modules" value="LOCATION BLUETOOTH WIFI CAMERA NOTIFICATIONS CALENDAR REMINDERS MOTION NFC EXTERNAL_STORAGE" />
     
-    <preference name="ShowSplashScreenSpinner" value="false"/>
-
     <plugin name="cordova-plugin-statusbar" />
     <plugin name="cordova-plugin-geolocation" />
     <plugin name="cordova-plugin-device" />
@@ -215,16 +206,18 @@
     <plugin name="cordova-plugin-local-notification" spec="https://github.com/ZarishIqbal/cordova-local-notifications-plugin" />
     <plugin name="cordova-plugin-app-version" />
     <!--<plugin name="cordova-plugin-contacts-x" spec="https://github.com/EinfachHans/cordova-plugin-contacts-x" />-->
+    <!--
+    <plugin name="cordova-plugin-wkwebview-engine" />
+    <plugin name="cordova-plugin-wkwebview-file-xhr" spec="~2.1.4" />
+    -->
     <plugin name="cordova-plugin-iosrtc" />
     <!--<plugin name="cordova-plugin-ios-xhr" spec="https://github.com/globules-io/cordova-plugin-ios-xhr" />-->
     <plugin name="cordova-plugin-intent-list" spec="https://github.com/nick-denry/cordova-plugin-intent-list" />
     <plugin name="cordova-plugin-devoptionschecker" />
     <plugin name="cordova-plugin-market" />
+    <plugin name="cordova-plugin-x-socialsharing" />
     <plugin name="skwas-cordova-plugin-appinfo" />
     <plugin name="cordova-plugin-android-packagemanager" specs="https://github.com/jybanez/cordova-plugin-android-packagemanager" />
     <plugin name="cordova-plugin-fingerprint-aio" />
-    <!-- <plugin name="cordova-plugin-printer" specs="https://github.com/elvar-dk/cordova-plugin-printer" /> -->
-    <!-- <plugin name="cordova-plugin-bluetoothle" specs="https://github.com/gregor-srdic/cordova-plugin-bluetoothle" /> -->
-    <plugin name="cordova-plugin-ble-central@slim" />
     <content src="index.html" />
 </widget>
