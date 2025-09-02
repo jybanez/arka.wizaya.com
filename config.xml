@@ -121,7 +121,7 @@
             -->
         </edit-config>
         
-        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screen/android/splash-port-xxxhdpi.png"/>
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screen/android/splash-square.png"/>
         <preference name="AndroidWindowSplashScreenBackground" value="#ffffff"/>   
          
         <!-- <preference name="SplashScreenDelay" value="0" /> -->
